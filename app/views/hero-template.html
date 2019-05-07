@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Heros</title>
+</head>
+
+<script>
+    var url;
+
+    function createOrUpdate() {
+        const id = document.getElementsByTagName('form')[0].id;
+        const name = document.getElementById('name').value;
+        const superpower = document.getElementById('superpower').value;
+
+        if (url.searchParams.get("_id") && url.searchParams.get("name")
+            && url.searchParams.get("superpower")) {
+            updateHero(id, name, superpower);
+        } else {
+            createHero();
+        }
+
+        return false;
+    }
+
+    function updateHero(id, name, superpower) {
+        const URL = 'http://localhost:3000/heros';
+        var xhttp = new XMLHttpRequest();
+        const hero = {
+            _id: id,
+            name: name,
+            superpower: {
+                description: superpower
+            }
+        };
+
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                window.location = 'http://localhost:3000/heros.html';
+            }
+        };
+
+        xhttp.open("PUT", URL);
+        xhttp.setRequestHeader("Content-Type", "application/json");
+        xhttp.send(JSON.stringify(hero));
+    }
+
+    function createHero() {
+        const URL = 'http://localhost:3000/heros';
+        var xhttp = new XMLHttpRequest();
+        const hero = {
+            name: document.getElementById('name').value,
+            superpower: {
+                description: document.getElementById('superpower').value
+            }
+        };
+
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                window.location = 'http://localhost:3000/heros.html';
+            }
+        };
+
+        xhttp.open("POST", URL);
+        xhttp.setRequestHeader("Content-Type", "application/json");
+        xhttp.send(JSON.stringify(hero));
+    }
+
+    function loadHero() {
+        url = new URL(window.location);
+        const id = url.searchParams.get("_id");
+        const name = url.searchParams.get("name");
+        const superpower = url.searchParams.get("superpower");
+
+        if (id && name && superpower) {
+            var form = document.getElementsByTagName("form")[0];
+            form.setAttribute('id', id);
+            document.getElementById('name').value = name;
+            document.getElementById('superpower').value = superpower;
+        }
+    }
+
+    window.onload = function () {
+        loadHero();
+    };
+</script>
+
+<body>
+    <div>
+        <form onsubmit="return createOrUpdate()">
+            Nome <input type="text" id="name" required>
+            Superpoder <input type="text" id="superpower" required>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>

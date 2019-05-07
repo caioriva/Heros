@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Heros</title>
+</head>
+
+<script>
+    function getHeros() {
+        const URL = 'http://localhost:3000/heros';
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var herosJSON;
+                try {
+                    herosJSON = JSON.parse(this.responseText);
+
+                } catch (e) {
+                    eval('Unable to parse Heros JSON: ' + xmlhttp.responseText);
+                }
+
+                var herosTableBody = document.getElementById('heros-table').getElementsByTagName('tbody')[0];
+                var heroRow;
+                var nameCell;
+                var superpowerCell;
+                var nameTextNode;
+                var superpowerTextNode;
+
+                herosTableBody.innerHTML = '';
+                herosJSON.forEach(hero => {
+                    heroRow = document.createElement("tr");
+                    nameCell = document.createElement("td");
+                    superpowerCell = document.createElement("td");
+                    nameTextNode = document.createTextNode(hero.name);
+                    superpowerTextNode = document.createTextNode(hero.superpower.description);
+                    nameCell.appendChild(nameTextNode);
+                    superpowerCell.appendChild(superpowerTextNode);
+                    heroRow.appendChild(nameCell);
+                    heroRow.appendChild(superpowerCell);
+                    herosTableBody.appendChild(heroRow);
+                    heroRow.setAttribute('id', hero._id);
+                });
+                addSelectionRowHandler(herosTableBody);
+            }
+        };
+        xhttp.open("GET", URL);
+        xhttp.send();
+    }
+
+    function addSelectionRowHandler(tableBody) {
+        var rows = tableBody.getElementsByTagName("tr");
+
+        for (i = 0; i < rows.length; i++) {
+            var currentRow = tableBody.rows[i];
+            var createClickHandler = function (row) {
+                return function () {
+                    var selectedRow = document.getElementsByClassName('selected-row');
+                    if (selectedRow[0] != null) {
+                        selectedRow[0].classList.remove("selected-row");
+                    }
+                    row.classList.add("selected-row");
+                };
+            };
+            currentRow.onclick = createClickHandler(currentRow);
+        }
+    }
+
+    function deleteSelectedHero() {
+        var selectedHero = document.getElementsByClassName("selected-row")[0];
+
+        if (selectedHero != null) {
+            const URL = 'http://localhost:3000/heros/' + selectedHero.id;
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    getHeros();
+                }
+            }
+
+            xhttp.open("DELETE", URL);
+            xhttp.send();
+        } else {
+            alert('Selecione um herói para remover');
+        }
+    }
+
+    function createHero() {
+        window.location = 'http://localhost:3000/hero-template.html';
+    }
+
+    function updateHero() {
+        const selectedHero = document.getElementsByClassName("selected-row")[0];
+        if (selectedHero != null) {
+            const id = selectedHero.id;
+            const name = selectedHero.cells[0].innerHTML;
+            const superpower = selectedHero.cells[1].innerHTML;
+
+            window.location = 'http://localhost:3000/hero-template.html?_id=' + id + '&name=' + name + '&superpower=' + superpower;
+        } else {
+            alert('Selecione um herói para atualizar');
+        }
+    }
+
+    window.onload = function () {
+        getHeros();
+    };
+</script>
+
+<body>
+    <div>
+        <table id='heros-table'>
+            <thead>
+                <tr>
+                    <td>Nome</td>
+                    <td>Superpoder</td>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <button onclick="createHero()">Criar Herói</button>
+        <button onclick="updateHero()">Atualizar Herói</button>
+        <button onclick="deleteSelectedHero()">Remover Herói</button>
+    </div>
+</body>
