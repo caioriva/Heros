@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Heros</title>
+    <link rel="stylesheet" type="text/css" href="styles/main.css">
 </head>
 
 <script>
@@ -108,18 +109,27 @@
 </script>
 
 <body>
-    <div>
-        <table id='heros-table'>
-            <thead>
-                <tr>
-                    <td>Nome</td>
-                    <td>Superpoder</td>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-        <button onclick="createHero()">Criar Herói</button>
-        <button onclick="updateHero()">Atualizar Herói</button>
-        <button onclick="deleteSelectedHero()">Remover Herói</button>
+    <div class='wrapper container column center'>
+        <div class='container row center space'>
+            <div>
+                <table id='heros-table' class='table'>
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Superpoder</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+        </div>
+        <div class='container row center space'>
+            <button class="action-button" onclick="createHero()">Criar Herói</button>
+            <button class="action-button" onclick="updateHero()">Atualizar Herói</button>
+            <button class="action-button" onclick="deleteSelectedHero()">Remover Herói</button>
+        </div>
     </div>
 </body>
+
+</html>

@@ -1,0 +1,98 @@
+html,
+body {
+    height: 100%;
+    margin: 0 auto;
+}
+
+.wrapper {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0 auto;
+}
+
+.center {
+    justify-content: center;
+}
+
+.container {
+    display: flex;
+}
+
+.space {
+    margin: 20px;
+}
+
+.row {
+    flex-direction: row;
+}
+
+.column {
+    flex-direction: column;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border-radius: 3px;
+    opacity: 0.85;
+    background: rgb(255, 255, 255);
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+    font-family: Verdana;
+    border: 1px solid #77a0c7e8;
+}
+
+th {
+    background: rgb(102, 153, 255);
+    color: rgb(255, 255, 255);
+    border-bottom: 1px solid #ddd;
+    font-size: 25px;
+}
+
+td {
+    color: rgb(153, 153, 153);
+    border-bottom: 1px solid #ddd;
+    font-size: 20px;
+}
+
+tr:hover {
+    background: rgb(204, 214, 221);
+}
+
+.selected-row {
+    background: rgb(204, 214, 221);
+}
+
+.action-button {
+    width: 150px;
+    line-height: 35px;
+    padding: 0;
+    border: none;
+    border-radius: 3px;
+    opacity: 0.85;
+    font-size: 15px;
+    margin-right: 2.5%;
+    margin-left: 2.5% 
+}
+
+.form-input {
+    width: 150px;
+    line-height: 35px;
+    padding: 0;
+    border-radius: 3px;
+    opacity: 0.85;
+    font-size: 15px;
+    margin-right: 2.5%;
+    margin-left: 2.5% 
+}
+
+p {
+    font-family: Verdana;
+    font-size: 20px;
+    color: rgb(102, 153, 255);
+}
