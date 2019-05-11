@@ -1,28 +1,28 @@
 const mongoose = require('mongoose');
 
-const HeroSchema = mongoose.Schema({
-    name: {
+const HeroiSchema = mongoose.Schema({
+    nome: {
         type: String,
         unique: true,
         required: true
     },
-    age: {
-        type: Number,
-        unique: false,
-        required: false
-    },
-    superpower: {
-        description: {
+    superpoder: {
+        descricao: {
             type: String,
             unique: false,
             required: true
         },
-        abilities: {
+        habilidades: {
             type: [String],
+            unique: false,
+            required: false
+        },
+        nivel: {
+            type: Number,
             unique: false,
             required: false
         }
     }
 });
 
-module.exports = mongoose.model('Hero', HeroSchema);
+module.exports = mongoose.model('heroi', HeroiSchema);

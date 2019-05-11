@@ -19,20 +19,20 @@
             && url.searchParams.get("superpower")) {
             updateHero(id, name, superpower);
         } else {
-            createHero();
+            createHero(name, superpower);
         }
 
         return false;
     }
 
     function updateHero(id, name, superpower) {
-        const URL = 'http://localhost:3000/heros';
+        const URL = 'http://localhost:3000/herois';
         var xhttp = new XMLHttpRequest();
         const hero = {
             _id: id,
-            name: name,
-            superpower: {
-                description: superpower
+            nome: name,
+            superpoder: {
+                descricao: superpower
             }
         };
 
@@ -47,13 +47,13 @@
         xhttp.send(JSON.stringify(hero));
     }
 
-    function createHero() {
-        const URL = 'http://localhost:3000/heros';
+    function createHero(name, superpower) {
+        const URL = 'http://localhost:3000/herois';
         var xhttp = new XMLHttpRequest();
         const hero = {
-            name: document.getElementById('name').value,
-            superpower: {
-                description: document.getElementById('superpower').value
+            nome: name,
+            superpoder: {
+                descricao: superpower
             }
         };
 

@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 
-const DATABASE = 'herodb';
-const URL = 'mongodb://localhost:27017/' + DATABASE;
+const DB = 'heroidb';
+const URL = 'mongodb://localhost:27017/' + DB;
 
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 
-const connect = () => {
+const conectar = () => {
     mongoose.connect(URL, { useNewUrlParser: true })
         .then(() => {
             console.log('Conexão com o banco de dados realizada com sucesso');
@@ -19,5 +19,5 @@ const connect = () => {
 };
 
 module.exports = {
-    connect
+    conectar
 }

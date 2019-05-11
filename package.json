@@ -1,7 +1,7 @@
 {
-  "name": "helloworld",
+  "name": "heros",
   "version": "1.0.0",
-  "description": "",
+  "description": "API de heróis",
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
